@@ -6,7 +6,7 @@ namespace GMTK
         #endregion
 
         #region Methods 
-        public void StartDrag();
+        public bool StartDrag();
         void DragUpdate(UnityEngine.Vector2 _position);
         public void Drop();
         #endregion

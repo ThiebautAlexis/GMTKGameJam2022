@@ -15,10 +15,41 @@ namespace GMTK
 
         #region Methods 
 
-        public override void ApplyBehaviour()
+        public override void ApplyBehaviour(ref int[] tiles, int _armyID, out int _basePosition, out int _targetPosition)
         {
-            Debug.Log("Hop hop hop!");
-            throw new NotImplementedException();
+            _basePosition = 0;
+            for (int i = 0; i < tiles.Length; i++)
+            {
+                if (tiles[i] == _armyID)
+                {
+                    _basePosition = i;
+                    break;
+                }
+            }
+
+            _targetPosition = _basePosition + ((isUpgraded ? rangeUpgraded : range) * _armyID);
+            if(_targetPosition > _basePosition)
+            {
+                for (int i = _basePosition; i < _targetPosition; i++)
+                {
+                    if (i + 1 < tiles.Length && tiles[i + 1] == 0)
+                        continue;
+                    _targetPosition = i;
+                    break;
+                }
+            }
+            else
+            {
+                for (int i = _basePosition; i > _targetPosition; i--)
+                {
+                    if (i - 1 >= 0 && tiles[i - 1] == 0)
+                        continue;
+                    _targetPosition = i;
+                    break;
+                }
+            }
+            tiles[_basePosition] = 0;
+            tiles[_targetPosition] = _armyID;
         }
         #endregion
     }

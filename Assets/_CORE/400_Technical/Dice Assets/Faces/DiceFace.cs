@@ -13,12 +13,12 @@ namespace GMTK
         [SerializeField] protected bool isUpgraded = false;
         [SerializeField] protected Sprite uprgadedFaceSprite = null;
 
-        public virtual Behaviour FaceBehaviour => Behaviour.Empty;
+        public virtual Behaviour FaceBehaviour => Behaviour.Attack;
 
         #endregion
 
         #region Methods 
-        public abstract void ApplyBehaviour();
+        public abstract void ApplyBehaviour(ref int[] tiles, int _armyID, out int _basePosition, out int _targetPosition);
 
         public Sprite GetFaceSprite()
         {
@@ -28,9 +28,9 @@ namespace GMTK
         }
         #endregion
 
+        [Flags]
         public enum Behaviour
         {
-            Empty,
             Attack,
             Movement
         }

@@ -6,8 +6,8 @@ namespace GMTK
     public class DiceAsset : ScriptableObject
     {
         #region Fields and Properties
-        [SerializeField] private UnitType unitType = UnitType.Default;
         [SerializeField] private DiceFace[] dicefaces = new DiceFace[6];
+        public UnitType UnitType = UnitType.Default;
         public Sprite DiceSprite; 
         #endregion
 

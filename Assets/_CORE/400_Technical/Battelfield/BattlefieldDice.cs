@@ -9,15 +9,14 @@ namespace GMTK
         #region Fields and Properties
         [SerializeField] private     SpriteRenderer diceRenderer;
         [SerializeField] private     SpriteRenderer faceRenderer;
-        [SerializeField] private new BoxCollider2D collider;
-
-        private DiceFace selectedFace = null;
-        private int diceIndex = -1;
+        protected UnitType diceType = UnitType.Default;
+        protected DiceFace selectedFace = null;
         #endregion
 
         #region Methods 
         internal void RollDice(DiceAsset diceAsset)
         {
+            diceType = diceAsset.UnitType;
             diceRenderer.sprite = diceAsset.DiceSprite;
             selectedFace = diceAsset.GetRandomFace();
             // Sequence to roll dice here
@@ -29,22 +28,14 @@ namespace GMTK
         }
         #endregion
 
-        #region I Drag And Droppable
-        public void DragUpdate(Vector2 _position)
-        {
-            transform.position = Vector2.MoveTowards(transform.position, _position, Time.deltaTime * 200);
-        }
+        #region Drag and Drop 
 
-        public void Drop()
-        {
-            // Check if in Battle Horn
+        public virtual void DragUpdate(Vector2 _position){}
 
-        }
+        public virtual void Drop(){}
 
-        public void StartDrag()
-        {
+        public virtual bool StartDrag() => false;
 
-        }
         #endregion
     }
 }

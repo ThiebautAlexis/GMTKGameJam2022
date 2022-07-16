@@ -6,8 +6,9 @@ namespace GMTK
     public class BattlefieldDicePool : MonoBehaviour
     {
         #region Fields and Properties
-        [SerializeField] private PoolOwner owner = PoolOwner.None;
+        [SerializeField] private Owner owner = Owner.None;
         [SerializeField] private BattlefieldDice[] dices = new BattlefieldDice[] { };
+        [SerializeField] private Vector2[] dicesPosition = new Vector2[] { };
         #endregion
 
         #region Methods 
@@ -15,10 +16,10 @@ namespace GMTK
         {
             switch (owner)
             {
-                case PoolOwner.Player:
+                case Owner.Player:
                     BattlefieldManager.OnPlayerDicePoolSelected += RollDicePool;
                     break;
-                case PoolOwner.Opponent:
+                case Owner.Opponent:
                     BattlefieldManager.OnOpponentDicePoolSelected += RollDicePool;
                     break;
                 default:
@@ -30,11 +31,11 @@ namespace GMTK
         {
             switch (owner)
             {
-                case PoolOwner.Player:
+                case Owner.Player:
                     BattlefieldManager.OnPlayerDicePoolSelected -= RollDicePool;
                     break;
-                case PoolOwner.Opponent:
-                    // BattlefieldManager.OnOpponentDicePoolSelected -= RollDicePool;
+                case Owner.Opponent:
+                    BattlefieldManager.OnOpponentDicePoolSelected -= RollDicePool;
                     break;
                 default:
                     break;
@@ -50,11 +51,5 @@ namespace GMTK
         }
         #endregion
 
-        private enum PoolOwner
-        {
-            None,
-            Player, 
-            Opponent
-        }
     }
 }

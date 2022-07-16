@@ -15,13 +15,30 @@ namespace GMTK
 
         [SerializeField, Range(1, 4)] private int damages = 1;
         [SerializeField, Range(1, 4)] private int damagesUpgraded = 1;
+        
         #endregion
 
         #region Methods 
-        public override void ApplyBehaviour()
+        public override void ApplyBehaviour(ref int[] tiles, int _armyID, out int _basePosition, out int _targetPosition)
         {
-            Debug.Log("Et vlan!");
-            throw new NotImplementedException();
+            _basePosition = 0;
+            for (int i = 0; i < tiles.Length; i++)
+            {
+                if(tiles[i] == _armyID)
+                {
+                    _basePosition = i;
+                    break;
+                }
+            }
+
+            _targetPosition = _basePosition + ((isUpgraded ? rangeUpgraded : range) * _armyID) ;
+            if (_targetPosition < 0 || _targetPosition >= tiles.Length)
+                return;
+            if(tiles[_targetPosition] > 0)
+                Army.PlayerArmy.TakeDamages(isUpgraded ? damagesUpgraded : damages);
+            else if(tiles[_targetPosition] < 0)
+                Army.OpponentArmy.TakeDamages(isUpgraded ? damagesUpgraded : damages);
+            Debug.Log("Attack!");
         }
         #endregion
     }

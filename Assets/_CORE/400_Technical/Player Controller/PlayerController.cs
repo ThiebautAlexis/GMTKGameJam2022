@@ -24,7 +24,7 @@ namespace GMTK
             Army.PlayerArmy.InitArmy(baseDices);
             playerInputs.Init(this);
 
-            BattlefieldManager.StartNewRound();
+            BattlefieldManager.StartBattle();
         }
 
         RaycastHit2D[] hit = new RaycastHit2D[1];
@@ -34,16 +34,18 @@ namespace GMTK
             {
                 if(hit[0].collider.TryGetComponent(out dragAndDroppable))
                 {
-                    dragAndDroppable.StartDrag();
-                    hasDraggable = true;
+                    hasDraggable = dragAndDroppable.StartDrag();
                 }
             }
         }
 
         internal void OnInputCanceled(InputAction.CallbackContext context)
         {
-            dragAndDroppable.Drop();
-            hasDraggable = false;
+            if(hasDraggable)
+            {
+                dragAndDroppable.Drop();
+                hasDraggable = false;
+            }
         }
 
 
@@ -51,7 +53,6 @@ namespace GMTK
         {
             if (hasDraggable)
             {
-
                 dragAndDroppable.DragUpdate(camera.ScreenToWorldPoint(obj.action.ReadValue<Vector2>()));
             }
         }

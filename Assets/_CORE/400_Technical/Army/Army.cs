@@ -7,10 +7,11 @@ namespace GMTK
 {
     public class Army
     {
-        public static Army PlayerArmy = new Army();
-        public static Army OpponentArmy = new Army();
+        public static Army PlayerArmy = new Army() { ArmyID = 1};
+        public static Army OpponentArmy = new Army() { ArmyID = -1};
 
         #region Fields and Properties
+        public int ArmyID = 0;
         public List<DiceAsset> diceReserve = new List<DiceAsset>();
         public List<DiceAsset> diceUsed = new List<DiceAsset>();
         public List<DiceAsset> diceUnavailable = new List<DiceAsset>();
@@ -79,5 +80,12 @@ namespace GMTK
             Debug.Log("Dead");
         }
         #endregion
+
     }
+        public enum Owner
+        {
+            None,
+            Player,
+            Opponent
+        }
 }
