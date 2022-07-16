@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a7ba0f78af347046b363e0acaa4c426, type: 3}
+  m_Name: PlayerInputs
+  m_EditorClassIdentifier: 
+  clickAction:
+    m_Name: Click
+    m_Type: 1
+    m_ExpectedControlType: Button
+    m_Id: 617bb73b-ade7-4c5f-acb0-f3942fca613e
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: b36c31fe-3a7a-4b12-acbd-97b06b9e0629
+      m_Path: <Mouse>/leftButton
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Click
+      m_Flags: 0
+    m_Flags: 0
+  mousePosition:
+    m_Name: Mouse Position
+    m_Type: 0
+    m_ExpectedControlType: Vector2
+    m_Id: 423a3db6-2c2b-464d-ac92-02a2d43ca80e
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: c2b60cda-9c4b-4006-ae88-d19a0f969fd6
+      m_Path: <Mouse>/position
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Mouse Position
+      m_Flags: 0
+    m_Flags: 0

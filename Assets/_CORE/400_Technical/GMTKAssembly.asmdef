@@ -2,7 +2,8 @@
     "name": "GMTKAssembly",
     "rootNamespace": "GMTK",
     "references": [
-        "GUID:f3e51e66c327fb34b9e98c61cb66b2e0"
+        "GUID:f3e51e66c327fb34b9e98c61cb66b2e0",
+        "GUID:75469ad4d38634e559750d17036d5f7c"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
