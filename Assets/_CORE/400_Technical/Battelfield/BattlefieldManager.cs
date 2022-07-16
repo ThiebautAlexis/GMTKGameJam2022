@@ -12,6 +12,8 @@ namespace GMTK
         public static event Action<int, int> OnPlayerArmyMove;
         public static event Action<int, int> OnOpponentArmyMove;
 
+        public static event Action OnPlayerAction;
+
         public static event Action<UnitType, int, int> OnPlayerArmyAttack;
         public static event Action<UnitType, int, int> OnOpponentArmyAttack;
         #endregion
@@ -54,23 +56,28 @@ namespace GMTK
 
         internal static void PlayAction(DiceFace selectedFace, int _armyID, UnitType _unitType )
         {
-            selectedFace.ApplyBehaviour(ref tiles, _armyID, out int baseTile, out int targetTile);
-            switch (selectedFace.FaceBehaviour)
+            OnPlayerAction?.Invoke();
+
+            if(selectedFace != null)
             {
-                case DiceFace.Behaviour.Attack:
-                    if (_armyID > 0)
-                        OnPlayerArmyAttack?.Invoke(_unitType, baseTile, targetTile);
-                    else if (_armyID < 0)
-                        OnOpponentArmyAttack?.Invoke(_unitType, baseTile, targetTile);
-                    break;
-                case DiceFace.Behaviour.Movement:
-                    if (_armyID > 0)
-                        OnPlayerArmyMove?.Invoke(baseTile, targetTile);
-                    else if (_armyID < 0)
-                        OnOpponentArmyMove?.Invoke(baseTile, targetTile);
-                    break;
-                default:
-                    break;
+                selectedFace.ApplyBehaviour(ref tiles, _armyID, out int baseTile, out int targetTile);
+                switch (selectedFace.FaceBehaviour)
+                {
+                    case DiceFace.Behaviour.Attack:
+                        if (_armyID > 0)
+                            OnPlayerArmyAttack?.Invoke(_unitType, baseTile, targetTile);
+                        else if (_armyID < 0)
+                            OnOpponentArmyAttack?.Invoke(_unitType, baseTile, targetTile);
+                        break;
+                    case DiceFace.Behaviour.Movement:
+                        if (_armyID > 0)
+                            OnPlayerArmyMove?.Invoke(baseTile, targetTile);
+                        else if (_armyID < 0)
+                            OnOpponentArmyMove?.Invoke(baseTile, targetTile);
+                        break;
+                    default:
+                        break;
+                }
             }
         }
         #endregion

@@ -11,20 +11,34 @@ namespace GMTK
         [SerializeField] private     SpriteRenderer faceRenderer;
         protected UnitType diceType = UnitType.Default;
         protected DiceFace selectedFace = null;
+        private Sequence rollSequence;
+
         #endregion
 
         #region Methods 
+        int randomIndex = 0;
         internal void RollDice(DiceAsset diceAsset)
         {
+            randomIndex = 0;
             diceType = diceAsset.UnitType;
             diceRenderer.sprite = diceAsset.DiceSprite;
             selectedFace = diceAsset.GetRandomFace();
-            // Sequence to roll dice here
-            if (selectedFace)
-                faceRenderer.sprite = selectedFace.GetFaceSprite();
-            else faceRenderer.sprite = null;
-
             gameObject.SetActive(true);
+
+            // Sequence to roll dice here
+            if (rollSequence.IsActive())
+                rollSequence.Kill();
+            rollSequence = DOTween.Sequence();
+
+            /// Here add the rolling Dice sequence
+
+            rollSequence.onComplete += SelectFace;
+            void SelectFace()
+            {
+                if (selectedFace)
+                    faceRenderer.sprite = selectedFace.GetFaceSprite();
+                else faceRenderer.sprite = null;
+            }
         }
         #endregion
 

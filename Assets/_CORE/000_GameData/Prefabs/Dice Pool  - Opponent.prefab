@@ -407,6 +407,34 @@ PrefabInstance:
       propertyPath: dices.Array.data[2]
       value: 
       objectReference: {fileID: 6337458334384429990}
+    - target: {fileID: 7378297816073007433, guid: b9a2faf1ef780e34593f41d3aa9d9c63, type: 3}
+      propertyPath: dicesPosition.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7378297816073007433, guid: b9a2faf1ef780e34593f41d3aa9d9c63, type: 3}
+      propertyPath: dicesPosition.Array.data[0].x
+      value: 2.83
+      objectReference: {fileID: 0}
+    - target: {fileID: 7378297816073007433, guid: b9a2faf1ef780e34593f41d3aa9d9c63, type: 3}
+      propertyPath: dicesPosition.Array.data[0].y
+      value: 0.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 7378297816073007433, guid: b9a2faf1ef780e34593f41d3aa9d9c63, type: 3}
+      propertyPath: dicesPosition.Array.data[1].x
+      value: 3.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 7378297816073007433, guid: b9a2faf1ef780e34593f41d3aa9d9c63, type: 3}
+      propertyPath: dicesPosition.Array.data[1].y
+      value: -0.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 7378297816073007433, guid: b9a2faf1ef780e34593f41d3aa9d9c63, type: 3}
+      propertyPath: dicesPosition.Array.data[2].x
+      value: 4.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7378297816073007433, guid: b9a2faf1ef780e34593f41d3aa9d9c63, type: 3}
+      propertyPath: dicesPosition.Array.data[2].y
+      value: -0.63
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b9a2faf1ef780e34593f41d3aa9d9c63, type: 3}
 --- !u!4 &2562993080918961131 stripped

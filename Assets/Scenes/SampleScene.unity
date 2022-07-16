@@ -305,6 +305,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2655870764117933726, guid: 53458958439666844851ec47911c0a84, type: 3}
+      propertyPath: resetPosition.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2655870764117933726, guid: 53458958439666844851ec47911c0a84, type: 3}
+      propertyPath: resetPosition.y
+      value: -10
+      objectReference: {fileID: 0}
     - target: {fileID: 5141895026081230236, guid: 53458958439666844851ec47911c0a84, type: 3}
       propertyPath: m_Name
       value: Dice Pool  - Opponent
@@ -1335,6 +1343,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1503010349}
     m_Modifications:
+    - target: {fileID: 1740293404298763081, guid: 7ecf7eab234f82742a814795c819cff5, type: 3}
+      propertyPath: resetPosition.x
+      value: -8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1740293404298763081, guid: 7ecf7eab234f82742a814795c819cff5, type: 3}
+      propertyPath: resetPosition.y
+      value: -10
+      objectReference: {fileID: 0}
     - target: {fileID: 2264425929654898236, guid: 7ecf7eab234f82742a814795c819cff5, type: 3}
       propertyPath: m_RootOrder
       value: 0
