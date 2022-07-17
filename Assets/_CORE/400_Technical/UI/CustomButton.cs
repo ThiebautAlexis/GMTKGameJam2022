@@ -23,7 +23,7 @@ namespace GMTK
         private Sequence sequence = null;
 
         private Vector3 baseScale = Vector3.one;
-        private bool isSelected = false;
+        [SerializeField] private bool isInteractable = true;
 
         // ---------------
 
@@ -34,6 +34,8 @@ namespace GMTK
 
         public void OnSubmit(BaseEventData eventData)
         {
+            if (!isInteractable) return;
+
             if (isSubmitting)
                 return;
 
@@ -64,6 +66,7 @@ namespace GMTK
 
         public void OnPointerClick(PointerEventData eventData)
         {
+            if (!isInteractable) return;
             if (isSubmitting)
                 return;
 
@@ -91,6 +94,8 @@ namespace GMTK
                 isSubmitting = false;
             }
         }
+
+        public void SetInteractible(bool _isInteractible) => isInteractable = _isInteractible;
         #endregion
     }
 }

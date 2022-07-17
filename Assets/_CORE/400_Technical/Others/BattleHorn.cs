@@ -9,7 +9,7 @@ namespace GMTK
         #region Fields and Properties
         [SerializeField] private Vector2 playerDicePosition; 
         [SerializeField] private Vector2 opponentDicePosition;
-
+        [SerializeField] private AudioSource hornSource;
         public Vector2 PlayerDicePosition => playerDicePosition;
         public Vector2 OpponentDicePosition => opponentDicePosition;
 
@@ -32,6 +32,7 @@ namespace GMTK
         {
             if (hornSequence.IsActive())
                 hornSequence.Kill(true);
+            hornSource.Play();
             hornSequence = DOTween.Sequence();
             hornSequence.Join(transform.DOShakePosition(1.5f, .15f, 10, 90, false, false));
         }

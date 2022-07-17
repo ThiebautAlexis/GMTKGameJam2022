@@ -15,9 +15,9 @@ namespace GMTK
 
         #region Methods 
 
-        public override void ApplyBehaviour(ref int[] tiles, int _armyID, out int _basePosition, out int _targetPosition, out bool _inflictDamages)
+        public override void ApplyBehaviour(ref int[] tiles, int _armyID, out int _basePosition, out int _targetPosition, out int _inflictDamages)
         {
-            _inflictDamages = false;
+            _inflictDamages = 0;
             _basePosition = 0;
             for (int i = 0; i < tiles.Length; i++)
             {
@@ -85,7 +85,7 @@ namespace GMTK
                 }
             }
 
-            return isUpgraded ? rangeUpgraded : range;
+            return (isUpgraded ? rangeUpgraded : range) * 5;
         }
         #endregion
     }

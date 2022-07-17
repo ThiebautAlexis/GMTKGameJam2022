@@ -7,22 +7,39 @@ namespace GMTK
     public class AIController : MonoBehaviour
     {
         #region Fields and Properties
-        [SerializeField] private DiceAsset[] dices = new DiceAsset[] { };
+        // [SerializeField] private DiceAsset[] dices = new DiceAsset[] { };
         [SerializeField] private BattlefieldDice[] battlefieldDices = new BattlefieldDice[] { };
         [SerializeField] private BattleHorn battleHorn;
+
+        [SerializeField] private DiceDatabase[] armies = new DiceDatabase[] { };
+        int index = 0;
+
         private static DiceFace[] currentFaces = new DiceFace[3];
         #endregion
 
         #region Methods 
         private void Awake()
         {
-            Army.OpponentArmy.InitArmy(dices);
             BattlefieldManager.OnOpponentActionSelected += SelectDice;
-        }
+            BattlefieldManager.OnBeforeBattleStart += InitArmy;
+            BattlefieldManager.OnBattleWon += ProceedToNextOpponent;
+            BattlefieldManager.OnBattleLost += ResetOpponents;
 
+        }
         private void OnDisable()
         {
             BattlefieldManager.OnOpponentActionSelected -= SelectDice;
+            BattlefieldManager.OnBeforeBattleStart -= InitArmy;
+            BattlefieldManager.OnBattleWon -= ProceedToNextOpponent;
+            BattlefieldManager.OnBattleLost -= ResetOpponents;
+        }
+
+        private void InitArmy()
+        {
+            DiceAsset[] _asset = new DiceAsset[armies[index].dice.Length];
+            Array.Copy(armies[index].dice, _asset, _asset.Length);
+            Army.OpponentArmy.InitArmy(_asset);
+            index++;
         }
 
         private Sequence selectionSequence;
@@ -41,15 +58,19 @@ namespace GMTK
             int[] _tempTiles = new int[9];
             Array.Copy(tiles, _tempTiles, tiles.Length);
             if(playerAction != null && playerAction.FaceBehaviour == DiceFace.Behaviour.Movement)
-                playerAction.ApplyBehaviour(ref _tempTiles, 1, out int _playerBasePosition, out int _playerTargetPosition, out bool _inflictDamagees);
-            int _bestScore = -9999, _currentScore =0;
+                playerAction.ApplyBehaviour(ref _tempTiles, 1, out int _playerBasePosition, out int _playerTargetPosition, out int _inflictDamagees);
+
+            int _bestScore = -9999, _currentScore = 0;
             opponentDiceIndex = -1;
             for (int i = 0; i < currentFaces.Length; i++)
             {
+
                 if (currentFaces[i] == null)
                     _currentScore = 0;
-                else 
-                    currentFaces[i].ComputeScore(_tempTiles);
+                else
+                {
+                    _currentScore =  currentFaces[i].ComputeScore(_tempTiles);
+                }
                 if(_currentScore > _bestScore)
                 {
                     opponentDiceIndex = i;
@@ -59,6 +80,17 @@ namespace GMTK
             return currentFaces[opponentDiceIndex];
         }
 
+        private void ResetOpponents() => index = 0;
+
+        private void ProceedToNextOpponent()
+        {
+            index++;
+            if (index >= armies.Length)
+            {
+                index = 0;
+                BattlefieldManager.WonGame();
+            }
+        }
 
         #endregion
     }

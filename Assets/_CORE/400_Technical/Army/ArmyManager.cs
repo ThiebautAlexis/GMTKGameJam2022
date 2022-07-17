@@ -22,17 +22,19 @@ namespace GMTK
             {
                 case Owner.Player:
                     BattlefieldManager.OnPlayerArmyMove += MoveArmy;
-                    BattlefieldManager.OnPlayerArmyAttack += ArmyAttack;
+                    Army.PlayerArmy.OnArmyAttackTarget += ArmyAttack;
+                    Army.PlayerArmy.OnArmyTakeDamages += TakeDamages;
                     break;
                 case Owner.Opponent:
                     BattlefieldManager.OnOpponentArmyMove += MoveArmy;
-                    BattlefieldManager.OnOpponentArmyAttack += ArmyAttack;
+                    Army.OpponentArmy.OnArmyAttackTarget += ArmyAttack;
+                    Army.OpponentArmy.OnArmyTakeDamages += TakeDamages;
                     break;
                 default:
                     break;
             }
             BattlefieldManager.OnBattleStart += PopulateArmy;
-            Army.OnArmyTakeDamages += TakeDamages;
+            BattlefieldManager.OnEndBattle += ClearArmy;
         }
 
         private void OnDisable()
@@ -41,17 +43,29 @@ namespace GMTK
             {
                 case Owner.Player:
                     BattlefieldManager.OnPlayerArmyMove -= MoveArmy;
-                    BattlefieldManager.OnPlayerArmyAttack -= ArmyAttack;
+                    Army.PlayerArmy.OnArmyAttackTarget -= ArmyAttack;
+                    Army.PlayerArmy.OnArmyTakeDamages -= TakeDamages;
+
                     break;
                 case Owner.Opponent:
                     BattlefieldManager.OnOpponentArmyMove -= MoveArmy;
-                    BattlefieldManager.OnOpponentArmyAttack -= ArmyAttack;
+                    Army.OpponentArmy.OnArmyAttackTarget -= ArmyAttack;
+                    Army.OpponentArmy.OnArmyTakeDamages -= TakeDamages;
                     break;
                 default:
                     break;
             }
             BattlefieldManager.OnBattleStart -= PopulateArmy;
-            Army.OnArmyTakeDamages += TakeDamages;
+            BattlefieldManager.OnEndBattle -= ClearArmy;
+        }
+
+        private void ClearArmy()
+        {
+            for (int i = 0; i < systems.Count; i++)
+            {
+                DestroyImmediate(systems[i].gameObject);
+            }
+            systems.Clear();
         }
 
         private void PopulateArmy()
@@ -75,11 +89,11 @@ namespace GMTK
                 systems.Add(Instantiate(_dices[i].ParticleSystem, transform));
                 systems[i].transform.localPosition = Vector2.right * Random.Range(tileRange.x, tileRange.y);
                 if (owner == Owner.Opponent)
-                    systems[i].transform.localScale = _invertedScale;
+                    systems[i].System.transform.localScale = _invertedScale;
             }
         }
 
-        private void ArmyAttack(UnitType _unitType, int _baseTile, int _targetTile, bool _inflictDamages)
+        private void ArmyAttack(UnitType _unitType, int _targetIndex)
         {
             for (int i = 0; i < systems.Count; i++)
             {
@@ -93,9 +107,7 @@ namespace GMTK
                     }
                     armySequence = DOTween.Sequence();
                     {
-                        armySequence.Append(systems[i].transform.DOShakePosition(.7f, .5f, 8, 90, false, false));
-                        armySequence.AppendCallback(() => systems[i].SubSystem.Play());
-                        armySequence.AppendInterval(.15f);
+                        armySequence.AppendInterval(.45f);
                         armySequence.AppendCallback(() => _mainModule.startSpeed = 0);
                     };
                     break;
@@ -114,17 +126,14 @@ namespace GMTK
             }
         }
 
-        private void TakeDamages(UnitType _unitType, int _armyID)
+        private void TakeDamages(UnitType _unitType)
         {
-            if(_armyID == (int)owner)
+            for (int i = 0; i < systems.Count; i++)
             {
-                for (int i = 0; i < systems.Count; i++)
+                if(systems[i].UnitType == _unitType)
                 {
-                    if(systems[i].UnitType == _unitType)
-                    {
-                        Destroy(systems[i].gameObject);
-                        systems.RemoveAt(i);
-                    }
+                    DestroyImmediate(systems[i].gameObject);
+                    systems.RemoveAt(i);
                 }
             }
         }

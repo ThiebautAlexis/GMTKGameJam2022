@@ -53,9 +53,11 @@ namespace GMTK
         {
             if (dicesSequence.IsActive())
                 dicesSequence.Kill(true);
+
             dicesSequence = DOTween.Sequence();
             for (int i = 0; i < dices.Length; i++)
             {
+                if (dices[i] == null) continue;
                 dicesSequence.AppendInterval(.25f);
                 dicesSequence.Join(dices[i].transform.DOMove(resetPosition, .70f));
             }
@@ -65,6 +67,7 @@ namespace GMTK
             {
                 for (int i = 0; i < dices.Length; i++)
                 {
+                    if (dices[i] == null) continue;
                     dices[i].DisableVisibility();
                 }
             }
@@ -74,12 +77,13 @@ namespace GMTK
         {
             for (int i = 0; i < _dicePool.Length; i++)
             {
+                if (_dicePool[i] == null) continue;
                 dices[i].RollDice(_dicePool[i], dicesPosition[i], i);
             }
             if (owner == Owner.Opponent)
             {
-                DiceFace[] _faces = new DiceFace[3];
-                for (int i = 0; i < dices.Length; i++)
+                DiceFace[] _faces = new DiceFace[_dicePool.Length];
+                for (int i = 0; i < _dicePool.Length; i++)
                 {
                     _faces[i] = dices[i].SelectedFace;
                 }

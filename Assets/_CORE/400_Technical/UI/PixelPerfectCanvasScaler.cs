@@ -74,6 +74,7 @@ namespace GMTK
             SetReferencePixelsPerUnit(m_ReferencePixelsPerUnit);
         }
 
+#if UNITY_EDITOR
         private void OnGUI()
         {
             Vector2 _screenSize;
@@ -88,6 +89,7 @@ namespace GMTK
             Rect _r = new Rect(0, 0, 250, 50);
             GUI.Label(_r, $"{_screenSize.x} x {_screenSize.y}");
         }
-        #endregion
+#endif
+#endregion
     }
 }

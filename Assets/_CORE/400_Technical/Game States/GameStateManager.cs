@@ -10,7 +10,9 @@ namespace GMTK
 
         public static readonly Type InMenuState = typeof(InMenuSate);              // 0
         public static readonly Type InGameState = typeof(InBattleState);           // 1
-        public static readonly Type PauseState = typeof(PauseState);               // 2
+        public static readonly Type EndOfBattleState = typeof(EndOfBattleState);   // 2
+
+        public static readonly Type PauseState = typeof(PauseState);               // 3
 
 
 
