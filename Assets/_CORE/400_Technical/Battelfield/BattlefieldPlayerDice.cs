@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using DG.Tweening;
 
 namespace GMTK
 {
@@ -10,10 +11,22 @@ namespace GMTK
         [SerializeField] private LayerMask triggeringLayer = new LayerMask();
 
         private static readonly Collider2D[] triggerElement = new Collider2D[1];
-
+        private Sequence hornSequence;
         #endregion
 
         #region Methods 
+        protected override void SelectFace()
+        {
+            base.SelectFace();
+            collider.enabled = true;
+        }
+
+        public override void DisableVisibility()
+        {
+            base.DisableVisibility();
+            collider.enabled = false;
+            Debug.Log("Disable visibility");
+        }
         #endregion
 
         #region I Drag And Droppable
@@ -28,7 +41,21 @@ namespace GMTK
             int _amount = Physics2D.OverlapBoxNonAlloc(transform.position, collider.size, 0f, triggerElement, triggeringLayer);
             if(_amount > 0)
             {
-                BattlefieldManager.PlayAction(selectedFace, Army.PlayerArmy.ArmyID, diceType);
+                BattleHorn _horn = triggerElement[0].GetComponent<BattleHorn>();
+                hornSequence = DOTween.Sequence();
+                hornSequence.Join(transform.DOMove(_horn.PlayerDicePosition, attributes.MovementDuration));
+                hornSequence.onComplete += CallAction;
+
+                void CallAction()
+                {
+                    //if (_horn)
+                    //_horn.ActivateHorn();
+                    // Ask AI 
+
+                    // BattlefieldManager.PlayAction(selectedFace, Army.PlayerArmy.ArmyID, diceType);
+                    BattlefieldManager.SelectPlayerAction(selectedFace, diceType);
+                }
+                
             }
         }
 

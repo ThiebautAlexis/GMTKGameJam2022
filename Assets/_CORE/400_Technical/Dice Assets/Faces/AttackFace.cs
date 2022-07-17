@@ -40,6 +40,26 @@ namespace GMTK
                 Army.OpponentArmy.TakeDamages(isUpgraded ? damagesUpgraded : damages);
             Debug.Log("Attack!");
         }
+
+
+        public override int ComputeScore(int[] tiles)
+        {
+            int _baseIndex = -1;
+            for (int i = 0; i < tiles.Length; i++)
+            {
+                if(tiles[i] == -1)
+                {
+                    _baseIndex = i;
+                    break;
+                }
+            }
+            int _targetIndex = _baseIndex + ((isUpgraded ? rangeUpgraded : range) * -1);
+            if (_targetIndex < 0 || _targetIndex >= tiles.Length)
+                return -999;
+            if (tiles[_targetIndex] == 1)
+                return isUpgraded ? damagesUpgraded : damages;
+            return 0;
+        }
         #endregion
     }
 }

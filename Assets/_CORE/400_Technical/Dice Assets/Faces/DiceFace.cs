@@ -19,6 +19,7 @@ namespace GMTK
 
         #region Methods 
         public abstract void ApplyBehaviour(ref int[] tiles, int _armyID, out int _basePosition, out int _targetPosition);
+        public abstract int ComputeScore(int[] tiles);
 
         public Sprite GetFaceSprite()
         {

@@ -216,3 +216,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   diceRenderer: {fileID: 8305910136944498097}
   faceRenderer: {fileID: 5256568319254762680}
+  attributes: {fileID: 11400000, guid: 0ca02a218b12ea54f8ece4dda683331b, type: 2}

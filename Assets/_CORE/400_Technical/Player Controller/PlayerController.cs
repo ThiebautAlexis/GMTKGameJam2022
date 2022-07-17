@@ -47,8 +47,6 @@ namespace GMTK
                 hasDraggable = false;
             }
         }
-
-
         internal void UpdateMousePosition(InputAction.CallbackContext obj)
         {
             if (hasDraggable)
@@ -57,6 +55,7 @@ namespace GMTK
             }
         }
 
+        public void RollTheDices() => BattlefieldManager.StartNewRound();
         #endregion
     }
 }

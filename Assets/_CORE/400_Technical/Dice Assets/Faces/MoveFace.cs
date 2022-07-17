@@ -26,7 +26,6 @@ namespace GMTK
                     break;
                 }
             }
-
             _targetPosition = _basePosition + ((isUpgraded ? rangeUpgraded : range) * _armyID);
             if(_targetPosition > _basePosition)
             {
@@ -50,6 +49,42 @@ namespace GMTK
             }
             tiles[_basePosition] = 0;
             tiles[_targetPosition] = _armyID;
+        }
+
+        public override int ComputeScore(int[] tiles)
+        {
+
+            int _basePosition = 0, _targetPosition = 0;
+            for (int i = 0; i < tiles.Length; i++)
+            {
+                if (tiles[i] == -1)
+                {
+                    _basePosition = i;
+                    break;
+                }
+            }
+
+            _targetPosition = _basePosition + ((isUpgraded ? rangeUpgraded : range) * -1);
+            if (_targetPosition > _basePosition)
+            {
+                for (int i = _basePosition; i < _targetPosition; i++)
+                {
+                    if (i + 1 < tiles.Length && tiles[i + 1] == 0)
+                        continue;
+                    return 0;
+                }
+            }
+            else
+            {
+                for (int i = _basePosition; i > _targetPosition; i--)
+                {
+                    if (i - 1 >= 0 && tiles[i - 1] == 0)
+                        continue;
+                    return 0;
+                }
+            }
+
+            return isUpgraded ? rangeUpgraded : range;
         }
         #endregion
     }

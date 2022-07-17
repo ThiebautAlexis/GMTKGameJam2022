@@ -133,6 +133,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   diceRenderer: {fileID: 3618029329828551689}
   faceRenderer: {fileID: 685183536738868480}
+  attributes: {fileID: 11400000, guid: 0ca02a218b12ea54f8ece4dda683331b, type: 2}
   collider: {fileID: 1172006619786485455}
   triggeringLayer:
     serializedVersion: 2

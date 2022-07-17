@@ -11,7 +11,6 @@ namespace GMTK
         [SerializeField] private BattlefieldDice[] dices = new BattlefieldDice[] { };
         [SerializeField] private Vector2[] dicesPosition = new Vector2[] { };
         [SerializeField] private Vector2 resetPosition;
-
         private Sequence dicesSequence;
         #endregion
 
@@ -29,7 +28,7 @@ namespace GMTK
                 default:
                     break;
             }
-            BattlefieldManager.OnPlayerAction += ResetDices;
+            BattlefieldManager.OnEndRound += ResetDices;
 
         }
 
@@ -46,7 +45,7 @@ namespace GMTK
                 default:
                     break;
             }
-            BattlefieldManager.OnPlayerAction -= ResetDices;
+            BattlefieldManager.OnEndRound -= ResetDices;
 
         }
 
@@ -66,7 +65,7 @@ namespace GMTK
             {
                 for (int i = 0; i < dices.Length; i++)
                 {
-                    dices[i].gameObject.SetActive(false); 
+                    dices[i].DisableVisibility();
                 }
             }
         }
@@ -75,17 +74,16 @@ namespace GMTK
         {
             for (int i = 0; i < _dicePool.Length; i++)
             {
-                dices[i].RollDice(_dicePool[i]);
+                dices[i].RollDice(_dicePool[i], dicesPosition[i], i);
             }
-            if (dicesSequence.IsActive())
-                dicesSequence.Kill(true);
-
-            dicesSequence = DOTween.Sequence();
-            for (int i = 0; i < dices.Length; i++)
+            if (owner == Owner.Opponent)
             {
-                dicesSequence.AppendInterval(.25f);
-                dicesSequence.Join(dices[i].transform.DOMove(resetPosition, .70f));
-
+                DiceFace[] _faces = new DiceFace[3];
+                for (int i = 0; i < dices.Length; i++)
+                {
+                    _faces[i] = dices[i].SelectedFace;
+                }
+                AIController.SetCurrentFaces(_faces);
             }
         }
         #endregion

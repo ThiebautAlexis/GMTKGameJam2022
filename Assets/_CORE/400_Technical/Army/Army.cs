@@ -42,7 +42,7 @@ namespace GMTK
             return _roll;
         }
 
-        internal void SendToUnusedDices(DiceAsset[] _usedDices) => diceUsed.AddRange(_usedDices);
+        internal void SendToUsedDices(DiceAsset[] _usedDices) => diceUsed.AddRange(_usedDices);
 
         private void RefreshReserve()
         {

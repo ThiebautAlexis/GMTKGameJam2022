@@ -13,6 +13,19 @@ namespace GMTK
 
         #region Methods 
         public DiceFace GetRandomFace() => dicefaces[Random.Range(0, dicefaces.Length)];
+
+        private int faceIndex = 0;
+        public Sprite GetFaceSprite()
+        {
+            faceIndex++;
+            if (faceIndex >= dicefaces.Length)
+                faceIndex = 0;
+
+            if (dicefaces[faceIndex] == null)
+                return null;
+
+            return dicefaces[faceIndex].GetFaceSprite();
+        }
         #endregion
     }
 
