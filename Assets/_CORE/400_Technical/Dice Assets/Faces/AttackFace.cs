@@ -19,8 +19,9 @@ namespace GMTK
         #endregion
 
         #region Methods 
-        public override void ApplyBehaviour(ref int[] tiles, int _armyID, out int _basePosition, out int _targetPosition)
+        public override void ApplyBehaviour(ref int[] tiles, int _armyID, out int _basePosition, out int _targetPosition, out bool _inflictDamages)
         {
+            _inflictDamages = false;
             _basePosition = 0;
             for (int i = 0; i < tiles.Length; i++)
             {
@@ -35,10 +36,15 @@ namespace GMTK
             if (_targetPosition < 0 || _targetPosition >= tiles.Length)
                 return;
             if(tiles[_targetPosition] > 0)
+            {
+                _inflictDamages = true;
                 Army.PlayerArmy.TakeDamages(isUpgraded ? damagesUpgraded : damages);
+            }
             else if(tiles[_targetPosition] < 0)
+            {
+                _inflictDamages = true;
                 Army.OpponentArmy.TakeDamages(isUpgraded ? damagesUpgraded : damages);
-            Debug.Log("Attack!");
+            }
         }
 
 

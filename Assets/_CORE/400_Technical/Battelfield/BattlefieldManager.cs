@@ -16,15 +16,18 @@ namespace GMTK
         public static event Action<int, int> OnOpponentArmyMove;
 
 
-        public static event Action<UnitType, int, int> OnPlayerArmyAttack;
-        public static event Action<UnitType, int, int> OnOpponentArmyAttack;
-        
+        public static event Action<UnitType, int, int, bool> OnPlayerArmyAttack;
+        public static event Action<UnitType, int, int, bool> OnOpponentArmyAttack;
+
+        public static event Action OnBattleStart;
+        public static event Action OnRoundStart;
+        public static event Action OnPlayRoundActions;
         public static event Action OnEndRound;
         #endregion
 
         #region Fields and Properties
         private static readonly int diceRollCount = 3;
-        private static int[] tiles = new int[9];
+        private static int[] tiles = new int[7];
         private static DiceAsset[] playerDice;
         private static DiceAsset[] opponentDice;
         #endregion
@@ -32,10 +35,12 @@ namespace GMTK
         #region Methods 
         public static void StartBattle()
         {
-            tiles[2] = 1;
-            OnPlayerArmyMove?.Invoke(0, 2);
-            tiles[6] = -1;
-            OnOpponentArmyMove?.Invoke(0, 6);
+            GameStatesManager.SetStateActivation(GameStatesManager.InGameState, true);
+            tiles[1] = 1;
+            OnPlayerArmyMove?.Invoke(0, 1);
+            tiles[5] = -1;
+            OnOpponentArmyMove?.Invoke(0, 5);
+            OnBattleStart?.Invoke();
         }
 
         public static void StartNewRound()
@@ -46,8 +51,6 @@ namespace GMTK
             opponentDice = Army.OpponentArmy.RollDices(diceRollCount);
             OnOpponentDicePoolSelected?.Invoke(opponentDice);
         }
-
-
         public static void EndRound()
         {
             Army.PlayerArmy.SendToUsedDices(playerDice);
@@ -59,14 +62,14 @@ namespace GMTK
         {
             if(selectedFace != null)
             {
-                selectedFace.ApplyBehaviour(ref tiles, _armyID, out int baseTile, out int targetTile);
+                selectedFace.ApplyBehaviour(ref tiles, _armyID, out int baseTile, out int targetTile, out bool _inflictDamages);
                 switch (selectedFace.FaceBehaviour)
                 {
                     case DiceFace.Behaviour.Attack:
                         if (_armyID > 0)
-                            OnPlayerArmyAttack?.Invoke(_unitType, baseTile, targetTile);
+                            OnPlayerArmyAttack?.Invoke(_unitType, baseTile, targetTile, _inflictDamages);
                         else if (_armyID < 0)
-                            OnOpponentArmyAttack?.Invoke(_unitType, baseTile, targetTile);
+                            OnOpponentArmyAttack?.Invoke(_unitType, baseTile, targetTile, _inflictDamages);
                         break;
                     case DiceFace.Behaviour.Movement:
                         if (_armyID > 0)
@@ -88,6 +91,7 @@ namespace GMTK
 
             roundSequence = DOTween.Sequence();
             {
+                roundSequence.AppendCallback(() => OnPlayRoundActions?.Invoke());
                 roundSequence.AppendInterval(1.0f);
                 roundSequence.AppendCallback(() => PlayAction(selectedFace, 1, unitType));
                 roundSequence.AppendInterval(1.0f);

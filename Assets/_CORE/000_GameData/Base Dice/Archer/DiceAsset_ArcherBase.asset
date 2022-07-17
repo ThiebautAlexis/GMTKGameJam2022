@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9223989c8a2bad94dac6c26a10109d43, type: 3}
   m_Name: DiceAsset_ArcherBase
   m_EditorClassIdentifier: 
-  unitType: 3
   dicefaces:
   - {fileID: 11400000, guid: 75c18d1172fabea48816eecf8d7cabce, type: 2}
   - {fileID: 0}
@@ -20,4 +19,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 11400000, guid: 75c18d1172fabea48816eecf8d7cabce, type: 2}
+  UnitType: 3
   DiceSprite: {fileID: 972306338, guid: 09851c096f358174cb8bd50b044f1501, type: 3}
+  ParticleSystem: {fileID: 2432185343034730107, guid: 8238dda4a0bd863479770597fef3af37, type: 3}

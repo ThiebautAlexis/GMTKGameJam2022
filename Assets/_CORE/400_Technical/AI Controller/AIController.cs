@@ -41,7 +41,7 @@ namespace GMTK
             int[] _tempTiles = new int[9];
             Array.Copy(tiles, _tempTiles, tiles.Length);
             if(playerAction != null && playerAction.FaceBehaviour == DiceFace.Behaviour.Movement)
-                playerAction.ApplyBehaviour(ref _tempTiles, 1, out int _playerBasePosition, out int _playerTargetPosition);
+                playerAction.ApplyBehaviour(ref _tempTiles, 1, out int _playerBasePosition, out int _playerTargetPosition, out bool _inflictDamagees);
             int _bestScore = -9999, _currentScore =0;
             opponentDiceIndex = -1;
             for (int i = 0; i < currentFaces.Length; i++)

@@ -8,7 +8,8 @@ namespace GMTK
         #region Fields and Properties
         [SerializeField] private DiceFace[] dicefaces = new DiceFace[6];
         public UnitType UnitType = UnitType.Default;
-        public Sprite DiceSprite; 
+        public Sprite DiceSprite;
+        public ArmyParticleSystem ParticleSystem;
         #endregion
 
         #region Methods 

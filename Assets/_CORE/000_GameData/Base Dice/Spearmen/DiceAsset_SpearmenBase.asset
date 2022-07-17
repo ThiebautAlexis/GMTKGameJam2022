@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9223989c8a2bad94dac6c26a10109d43, type: 3}
   m_Name: DiceAsset_SpearmenBase
   m_EditorClassIdentifier: 
-  unitType: 2
   dicefaces:
+  - {fileID: 11400000, guid: cfefdfb23f2fd604ca5caed565461829, type: 2}
+  - {fileID: 11400000, guid: cfefdfb23f2fd604ca5caed565461829, type: 2}
+  - {fileID: 11400000, guid: 6721d48aa38fe694fadd5b1eeb865af0, type: 2}
   - {fileID: 11400000, guid: cfefdfb23f2fd604ca5caed565461829, type: 2}
   - {fileID: 0}
   - {fileID: 11400000, guid: 6721d48aa38fe694fadd5b1eeb865af0, type: 2}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  UnitType: 2
   DiceSprite: {fileID: 1042882501, guid: 09851c096f358174cb8bd50b044f1501, type: 3}
+  ParticleSystem: {fileID: 6706747655537804973, guid: 22181754e5fab31459c67742699e006d, type: 3}

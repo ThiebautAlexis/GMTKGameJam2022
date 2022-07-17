@@ -170,6 +170,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   owner: 2
   tiles: {fileID: 717963139}
+  tileRange: {x: -1.25, y: 1.25}
 --- !u!1 &65464995
 GameObject:
   m_ObjectHideFlags: 0
@@ -513,7 +514,7 @@ SpriteRenderer:
   m_SortingLayerID: -1494568805
   m_SortingLayer: -1
   m_SortingOrder: -1
-  m_Sprite: {fileID: 489366691, guid: 9074d31d26acadb47a9a0be89cbefe17, type: 3}
+  m_Sprite: {fileID: -1246107391, guid: 9074d31d26acadb47a9a0be89cbefe17, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -605,9 +606,9 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0
+    y: 0.049999997
     width: 1
-    height: 1
+    height: 0.9
   near clip plane: 0.1
   far clip plane: 2
   field of view: 34
@@ -891,7 +892,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1852740885, guid: 9074d31d26acadb47a9a0be89cbefe17, type: 3}
+  m_Sprite: {fileID: 574048141, guid: 9074d31d26acadb47a9a0be89cbefe17, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -915,15 +916,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TilesPosition:
-  - {x: -8.6, y: -2}
-  - {x: -6.4, y: -2}
-  - {x: -4.25, y: -2}
-  - {x: -2.2, y: -2}
+  - {x: -8.25, y: -2}
+  - {x: -5.5, y: -2}
+  - {x: -2.75, y: -2}
   - {x: 0, y: -2}
-  - {x: 2, y: -2}
-  - {x: 4.25, y: -2}
-  - {x: 6.25, y: -2}
-  - {x: 8.5, y: -2}
+  - {x: 2.7, y: -2}
+  - {x: 5.5, y: -2}
+  - {x: 8.25, y: -2}
 --- !u!1 &809423262
 GameObject:
   m_ObjectHideFlags: 0
@@ -971,6 +970,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   owner: 1
   tiles: {fileID: 717963139}
+  tileRange: {x: -1.25, y: 1.25}
 --- !u!1 &867269401
 GameObject:
   m_ObjectHideFlags: 0
@@ -1118,8 +1118,8 @@ GameObject:
   m_Component:
   - component: {fileID: 917018726}
   - component: {fileID: 917018729}
-  - component: {fileID: 917018728}
   - component: {fileID: 917018727}
+  - component: {fileID: 917018730}
   m_Layer: 5
   m_Name: Canvas - In Game
   m_TagString: Untagged
@@ -1165,29 +1165,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &917018728
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 917018725}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_UiScaleMode: 1
-  m_ReferencePixelsPerUnit: 100
-  m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 1920, y: 1080}
-  m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
-  m_PhysicalUnit: 3
-  m_FallbackScreenDPI: 96
-  m_DefaultSpriteDPI: 96
-  m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
 --- !u!223 &917018729
 Canvas:
   m_ObjectHideFlags: 0
@@ -1209,6 +1186,30 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &917018730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 917018725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aedd84b83fed0bd4da1cabe4fcc3627f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_UiScaleMode: 1
+  m_ReferencePixelsPerUnit: 1000
+  m_ScaleFactor: 1
+  m_ReferenceResolution: {x: 1920, y: 1080}
+  m_ScreenMatchMode: 0
+  m_MatchWidthOrHeight: 0
+  m_PhysicalUnit: 3
+  m_FallbackScreenDPI: 96
+  m_DefaultSpriteDPI: 96
+  m_DynamicPixelsPerUnit: 1
+  m_PresetInfoIsWorld: 0
+  rootCanvas: {fileID: 917018729}
 --- !u!1 &1205633930
 GameObject:
   m_ObjectHideFlags: 0
@@ -1452,7 +1453,7 @@ SpriteRenderer:
   m_SortingLayerID: -1494568805
   m_SortingLayer: -1
   m_SortingOrder: -1
-  m_Sprite: {fileID: -1770208286, guid: 9074d31d26acadb47a9a0be89cbefe17, type: 3}
+  m_Sprite: {fileID: -1635351696, guid: 9074d31d26acadb47a9a0be89cbefe17, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

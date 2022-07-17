@@ -36,23 +36,23 @@ namespace GMTK
             rollSequence = DOTween.Sequence();
 
             /// Here add the rolling Dice sequence
-            rollSequence.AppendInterval(attributes.MovementInterval * _index);
+            rollSequence.AppendInterval(attributes.MovementInterval *  (1 +_index));
             rollSequence.Append(transform.DOMove(_position, attributes.MovementDuration).SetEase(attributes.MovementEase));
-            /*
+            
             for (int i = 0; i < attributes.RefreshCount; i++)
             {
                 rollSequence.AppendInterval(attributes.RefreshInterval);
                 rollSequence.AppendCallback(() => faceRenderer.sprite = diceAsset.GetFaceSprite());
             }
-            */
+            
             rollSequence.onComplete += SelectFace;
         }
+
         protected virtual void SelectFace()
         {
             if (selectedFace)
                 faceRenderer.sprite = selectedFace.GetFaceSprite();
             else faceRenderer.sprite = null;
-                
         }
         public virtual void DisableVisibility()
         {

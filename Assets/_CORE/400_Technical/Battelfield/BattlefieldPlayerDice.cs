@@ -25,7 +25,6 @@ namespace GMTK
         {
             base.DisableVisibility();
             collider.enabled = false;
-            Debug.Log("Disable visibility");
         }
         #endregion
 

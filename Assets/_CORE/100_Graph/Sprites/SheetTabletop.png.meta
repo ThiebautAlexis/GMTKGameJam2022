@@ -325,6 +325,69 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: TilesBigger
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 2533
+        width: 1938
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d6eacc9041da4f14988ec5bdd349c30e
+      internalID: 574048141
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TilesBiggerPosPlayer
+      rect:
+        serializedVersion: 2
+        x: 1923
+        y: 1994
+        width: 260
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d63b6e8f63c626a4e83ac4eb89d6ff1e
+      internalID: -1246107391
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TilesBiggerOppPos
+      rect:
+        serializedVersion: 2
+        x: 1923
+        y: 1914
+        width: 260
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 134ac41e17c05ab44af718de82308e8b
+      internalID: -1635351696
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -339,7 +402,10 @@ TextureImporter:
       TilesPosPlayer: 489366691
       SheetTabletop_5: -726857278
       SidePlayer: 109760513
+      TilesBiggerOppPos: -1635351696
       SideOpponent: -619734606
+      TilesBigger: 574048141
+      TilesBiggerPosPlayer: -1246107391
       SheetTabletop_6: -1735151868
       Tabletop: 1027688848
       DicePoolOpp: -1938413502

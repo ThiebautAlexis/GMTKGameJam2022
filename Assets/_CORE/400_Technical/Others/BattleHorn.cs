@@ -17,9 +17,19 @@ namespace GMTK
         #endregion
 
         #region Methods 
+        private void Awake()
+        {
+            BattlefieldManager.OnPlayRoundActions += ActivateHorn;    
+        }
+
+        private void OnDisable()
+        {
+            BattlefieldManager.OnPlayRoundActions -= ActivateHorn;
+        }
+
+
         public void ActivateHorn()
         {
-            Debug.Log("Poueeeet");
             if (hornSequence.IsActive())
                 hornSequence.Kill(true);
             hornSequence = DOTween.Sequence();
